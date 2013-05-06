@@ -1,0 +1,17 @@
+<phpunit bootstrap="./bootstrap.php" colors="true">
+    <testsuite name="All Tests">
+        <directory>./src/Library</directory>
+    </testsuite>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../src/Library</directory>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="testdox-html" target="./log/testdox.html" />
+        <log type="coverage-html" target="./log/report" charset="UTF-8" yui="true" highlight="true"
+        lowUpperBound="40" highLowerBound="80"/>
+    </logging>
+
+</phpunit>
