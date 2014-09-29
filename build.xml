@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Sample Project" basedir="." default="build">
+    <property name="dir-build" value="./build"/>
+    <property name="dir-tests" value="./tests"/>
+
+    <!-- ======================== -->
+    <!-- = (Default) Build Task = -->
+    <!-- ======================== -->
+    <target name="build">
+        <phingcall target="phplint"></phingcall>
+        <phingcall target="phpunit"></phingcall>
+    </target>
+
+    <!-- ================ -->
+    <!-- =   PHP Lint   = -->
+    <!-- ================ -->
+    <target name="phplint">
+        <echo msg="Running PHP Lint ..."/>
+        <phplint>
+            <fileset dir="src">
+                <include name="**/*.php"/>
+            </fileset>
+        </phplint>
+    </target>
+
+    <!-- ================ -->
+    <!-- = PHPUnit Task = -->
+    <!-- ================ -->
+    <target name="phpunit">
+        <echo msg="Running unit tests in ${dir-tests} ..."/>
+        <phpunit
+                bootstrap="${dir-tests}/bootstrap.php"
+                configuration="${dir-tests}/phpunit.xml"
+                haltonfailure="true"
+                haltonerror="true">
+            <formatter type="plain" usefile="false"/>
+            <batchtest>
+                <fileset dir="./src/">
+                    <include name="**/*Test*.php"/>
+                </fileset>
+            </batchtest>
+        </phpunit>
+    </target>
+
+</project>
