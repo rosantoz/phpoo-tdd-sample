@@ -10,6 +10,7 @@
         <phingcall target="phplint"></phingcall>
         <phingcall target="phpmd"></phingcall>
         <phingcall target="phpcpd"></phingcall>
+        <phingcall target="phpcs"></phingcall>
         <phingcall target="phpunit"></phingcall>
     </target>
 
@@ -41,6 +42,19 @@
                 </fileset>
                 <formatter type="default" usefile="false" outfile="reports/pmd-cpd.xml"/>
             </phpcpd>
+    </target>
+
+    <!-- ======================= -->
+    <!-- = PHPCodeSniffer Task = -->
+    <!-- ======================= -->
+    <target name="phpcs">
+        <echo msg="Running PHPCodeSniffer ..."/>
+        <phpcodesniffer
+                standard="PEAR"
+                file="./src"
+                allowedFileExtensions="php"
+                haltonerror="true"
+                haltonwarning="true"/>
     </target>
 
     <!-- ================ -->
