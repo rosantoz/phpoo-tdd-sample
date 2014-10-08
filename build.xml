@@ -8,6 +8,8 @@
     <!-- ======================== -->
     <target name="build">
         <phingcall target="phplint"></phingcall>
+        <phingcall target="phpmd"></phingcall>
+        <phingcall target="phpcpd"></phingcall>
         <phingcall target="phpunit"></phingcall>
     </target>
 
@@ -21,6 +23,24 @@
                 <include name="**/*.php"/>
             </fileset>
         </phplint>
+    </target>
+
+    <!-- ====================== -->
+    <!-- = PHP Mass Detector  = -->
+    <!-- ====================== -->
+    <target name="phpmd">
+        <echo msg="Running PHPMD ..."/>
+        <phpmd file="./src"/>
+    </target>
+
+    <target name="phpcpd">
+        <echo msg="Running PHPCPD ... "/>
+            <phpcpd>
+                <fileset dir="./">
+                    <include name="src/**/*.php" />
+                </fileset>
+                <formatter type="default" usefile="false" outfile="reports/pmd-cpd.xml"/>
+            </phpcpd>
     </target>
 
     <!-- ================ -->
