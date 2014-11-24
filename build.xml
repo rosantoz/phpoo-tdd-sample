@@ -36,12 +36,12 @@
 
     <target name="phpcpd">
         <echo msg="Running PHPCPD ... "/>
-            <phpcpd>
-                <fileset dir="./">
-                    <include name="src/**/*.php" />
-                </fileset>
-                <formatter type="default" usefile="false" outfile="reports/pmd-cpd.xml"/>
-            </phpcpd>
+        <phpcpd>
+            <fileset dir="./">
+                <include name="src/**/*.php"/>
+            </fileset>
+            <formatter type="default" usefile="false" outfile="reports/pmd-cpd.xml"/>
+        </phpcpd>
     </target>
 
     <!-- ======================= -->
@@ -62,18 +62,7 @@
     <!-- ================ -->
     <target name="phpunit">
         <echo msg="Running unit tests in ${dir-tests} ..."/>
-        <phpunit
-                bootstrap="${dir-tests}/bootstrap.php"
-                configuration="${dir-tests}/phpunit.xml"
-                haltonfailure="true"
-                haltonerror="true">
-            <formatter type="plain" usefile="false"/>
-            <batchtest>
-                <fileset dir="./src/">
-                    <include name="**/*Test*.php"/>
-                </fileset>
-            </batchtest>
-        </phpunit>
+        <exec dir="${dir-tests}" command="phpunit" logoutput="true" escape="false"/>
     </target>
 
 </project>
