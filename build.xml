@@ -2,6 +2,7 @@
 <project name="Sample Project" basedir="." default="build">
     <property name="dir-build" value="./build"/>
     <property name="dir-tests" value="./tests"/>
+    <property name="dir-docs" value="./docs"/>
 
     <!-- ======================== -->
     <!-- = (Default) Build Task = -->
@@ -12,6 +13,7 @@
         <phingcall target="phpcpd"></phingcall>
         <phingcall target="phpcs"></phingcall>
         <phingcall target="phpunit"></phingcall>
+        <phingcall target="phpdoc"></phingcall>
     </target>
 
     <!-- ================ -->
@@ -63,6 +65,20 @@
     <target name="phpunit">
         <echo msg="Running unit tests in ${dir-tests} ..."/>
         <exec dir="${dir-tests}" command="phpunit" logoutput="true" escape="false"/>
+    </target>
+
+    <!-- ====================== -->
+    <!-- = phpDocumentor Task = -->
+    <!-- ====================== -->
+    <target name="phpdoc">
+        <echo msg="Generating documentation with phpDocumentor ..."/>
+        <phpdoc2 title="API Documentation"
+                 destdir="${dir-docs}"
+                 template="responsive-twig">
+            <fileset dir="./src">
+                <include name="**/*.php" />
+            </fileset>
+        </phpdoc2>
     </target>
 
 </project>
