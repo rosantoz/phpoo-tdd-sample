@@ -35,7 +35,7 @@ class AuthorTest extends DbTestCase
         $this->author->save();
 
         $find = $this->author->find(1);
-        $this->assertEquals('Dave', $find['name']);
+        $this->assertEquals('Rodrigo', $find['name']);
     }
 
     public function testCanFetchAllAuthors()
